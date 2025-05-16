@@ -150,19 +150,11 @@
     src: url(/NotoSansJP-VariableFont_wght.ttf) format('truetype');
 }
 
-html {
-    -ms-overflow-style: none;
-}
-
 body {
     font-family: 'Noto Sans JP';
     font-optical-sizing: auto;
     font-weight: 400;
     font-style: normal;
-}
-
-.overflow-auto {
-    scrollbar-width: none;
 }
 
 .nicegui-expansion .q-expansion-item__content {

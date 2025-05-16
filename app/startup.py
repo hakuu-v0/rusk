@@ -1,11 +1,9 @@
-import asyncio
 import os
 import tempfile
 from pathlib import Path
 
 import yaml
 from nicegui import app, ui
-from nicegui.elements.column import Column
 from nicegui.elements.expansion import Expansion
 
 
@@ -30,7 +28,7 @@ class Startup:
         # CSS
         ui.add_css(content=Path("css/style.css"), shared=True)
 
-        app.on_disconnect(handler=lambda: app.shutdown())
+        # app.on_disconnect(handler=lambda: app.shutdown())
 
         ui.colors(
             primary="#1a1a1a",
@@ -47,63 +45,70 @@ class Startup:
         self.current_page: str = ""
 
     async def startup(self) -> None:
-        with ui.header(bordered=True).classes(add="p-0 gap-0 bg-white").classes(add="pywebview-drag-region"):
+        ui.query(selector=".nicegui-content").classes(
+            "w-screen h-screen p-0 grid grid-cols-[350px_1fr] grid-rows-[40px_1fr] gap-0",
+        )
+
+        with ui.row().classes("col-span-2 row-span-1 flex border-b-2"):
+            # with ui.header(bordered=True).classes(add="p-0 gap-0 bg-white").classes(add="pywebview-drag-region"):
             ui.button(text="らすく", on_click=lambda: self.show_info(), icon="sym_o_pets").props(add="flat")
             ui.space()
             ui.button(on_click=lambda: self.minimize(), icon="sym_o_minimize").props(add="flat")
             ui.button(on_click=lambda: self.toggle_fullscreen(), icon="sym_o_maximize").props(add="flat")
             ui.button(on_click=lambda: self.shutdown(), icon="sym_o_close").props(add="flat")
 
-        with ui.left_drawer(bordered=True).props(add="behavior=desktop"):
-            with ui.column().classes(add="w-full h-full gap-0"):
+        with ui.column().classes("h-[calc(100vh-40px)] overflow-hidden col-span-1 gap-0 border-t-2 border-r-2"):
 
-                def link_button(text: str, icon: str, target: str) -> Expansion:
-                    return (
-                        ui.expansion(
-                            text=text,
-                            icon=icon,
-                            on_value_change=lambda: self.navigate_to(target=target),
-                        )
-                        .props(add="hide-expand-icon")
-                        .classes(add="w-full gap-0 select-none")
-                    )
-
-                def expansion(text: str, icon: str, target: str) -> Expansion:
-                    return ui.expansion(
+            def link_button(text: str, icon: str, target: str) -> Expansion:
+                return (
+                    ui.expansion(
                         text=text,
                         icon=icon,
                         on_value_change=lambda: self.navigate_to(target=target),
-                    ).classes(add="w-full select-none")
+                    )
+                    .props("hide-expand-icon")
+                    .classes("w-full gap-0 select-none")
+                )
 
-                link_button(text="ホーム", icon="sym_o_home", target="home")
+            def expansion(text: str, icon: str, target: str) -> Expansion:
+                return ui.expansion(
+                    text=text,
+                    icon=icon,
+                    on_value_change=lambda: self.navigate_to(target=target),
+                ).classes("w-full select-none")
 
-                ui.separator()
+            link_button(text="ホーム", icon="sym_o_home", target="home")
+            ui.separator()
 
-                with expansion(text="お気に入り", icon="sym_o_star", target="list-"):
-                    link_button(text="コード 01", icon="sym_o_code", target="/1")
-                    link_button(text="コード 02", icon="sym_o_code", target="/2")
+            with expansion(text="お気に入り", icon="sym_o_star", target="list-"):
+                link_button(text="コード 01", icon="sym_o_code", target="/1")
+                link_button(text="コード 02", icon="sym_o_code", target="/2")
 
-                ui.separator()
+            ui.separator()
 
-                with ui.column().classes(add="w-full h-full gap-0 overflow-auto"):
-                    for category01 in yaml.safe_load(
-                        stream=Path("data/yaml/projects.yaml").read_text(encoding="utf-8"),
-                    ):
-                        ui.label(text=category01["text"]).classes(add="w-full p-4 text-sm text-gray-600 select-none")
-                        for category02 in category01["children"]:
-                            with expansion(text=category02["text"], icon="sym_o_folder", target="list-"):
-                                for item in category02["children"]:
-                                    link_button(text=item["text"], icon="sym_o_code", target=item["target"])
+            with (
+                ui.column()
+                .classes("w-full flex-1 overflow-auto gap-0")
+                .style("scrollbar-width: none; overscroll-behavior: none;")
+            ):
+                for category01 in yaml.safe_load(Path("data/yaml/projects.yaml").read_text(encoding="utf-8")):
+                    ui.label(text=category01["text"]).classes("w-full p-4 text-sm text-gray-600 select-none")
+                    for category02 in category01["children"]:
+                        with expansion(text=category02["text"], icon="sym_o_folder", target="list-"):
+                            for item in category02["children"]:
+                                link_button(text=item["text"], icon="sym_o_code", target=item["target"])
 
-                ui.space()
-
-                ui.separator()
-
-                link_button(text="開発者向け", icon="sym_o_construction", target="dev")
-                link_button(text="設定", icon="sym_o_settings", target="settings")
+            ui.separator()
+            link_button(text="開発者向け", icon="sym_o_construction", target="dev")
+            link_button(text="設定", icon="sym_o_settings", target="settings")
 
         # content
-        self.content: Column = ui.column()
+        with (
+            ui.column()
+            .classes("overflow-y-auto col-span-1 bg-white p-4 h-[calc(100vh-40px)] border-t-2 border-l-2")
+            .style(add="scrollbar-width: none; overscroll-behavior: none;") as self.content
+        ):
+            pass
 
         # dialog
         # info
@@ -146,7 +151,6 @@ class Startup:
             return
 
         self.content.clear()
-        self.content.classes(add="w-full h-full gap-0 overflow-auto")
 
         match target:
             case "home":

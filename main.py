@@ -27,10 +27,10 @@ from app.startup import Startup
 app.on_startup(handler=Startup().startup())
 
 # True or False
-debug = False
+debug = True
 
 if debug:
-    ui.run(uvicorn_reload_includes="*.css")
+    ui.run(uvicorn_reload_includes="*.css",uvicorn_reload_excludes=".venv/*.py")
 else:
     app.native.window_args["frameless"] = True
     ui.run(native=True, reload=False, port=native.find_open_port(), title="")
