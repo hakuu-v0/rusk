@@ -1,0 +1,54 @@
+- text: カテゴリ 01
+  children:
+    - text: カテゴリ 01-01
+      children:
+        - text: コード 01-01-01
+          target: "/1"
+        - text: コード 01-01-02
+          target: "/2"
+        - text: コード 01-01-03
+          target: "/3"
+    - text: カテゴリ 01-02
+      children:
+        - text: コード 01-02-01
+          target: "/1"
+        - text: コード 01-02-02
+          target: "/2"
+        - text: コード 01-02-03
+          target: "/3"
+- text: カテゴリ 01
+  children:
+    - text: カテゴリ 01-01
+      children:
+        - text: コード 01-01-01
+          target: "/1"
+        - text: コード 01-01-02
+          target: "/2"
+        - text: コード 01-01-03
+          target: "/3"
+    - text: カテゴリ 01-02
+      children:
+        - text: コード 01-02-01
+          target: "/1"
+        - text: コード 01-02-02
+          target: "/2"
+        - text: コード 01-02-03
+          target: "/3"
+- text: カテゴリ 01
+  children:
+    - text: カテゴリ 01-01
+      children:
+        - text: コード 01-01-01
+          target: "/1"
+        - text: コード 01-01-02
+          target: "/2"
+        - text: コード 01-01-03
+          target: "/3"
+    - text: カテゴリ 01-02
+      children:
+        - text: コード 01-02-01
+          target: "/1"
+        - text: コード 01-02-02
+          target: "/2"
+        - text: コード 01-02-03
+          target: "/3"

@@ -1,0 +1,17 @@
+[project]
+name = "rusk"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "nicegui>=2.17.0",
+    "pywebview>=5.4",
+    "uv>=0.7.4",
+]
+
+[dependency-groups]
+dev = [
+    "nuitka>=2.7.2",
+    "pillow>=11.2.1",
+]

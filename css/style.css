@@ -1,0 +1,170 @@
+:root {
+    --white: #ffffff;
+    --black: #000000;
+    --gray_0050: #f2f2f2;
+    --gray_0100: #e6e6e6;
+    --gray_0200: #cccccc;
+    --gray_0300: #b3b3b3;
+    --gray_0400: #999999;
+    --gray_0420: #949494;
+    --gray_0500: #7f7f7f;
+    --gray_0536: #767676;
+    --gray_0600: #666666;
+    --gray_0700: #4d4d4d;
+    --gray_0800: #333333;
+    --gray_0900: #1a1a1a;
+    --blue_0050: #e8f1fe;
+    --blue_0100: #d9e6ff;
+    --blue_0200: #c5d7fb;
+    --blue_0300: #9db7f9;
+    --blue_0400: #7096f8;
+    --blue_0500: #4979f5;
+    --blue_0600: #3460fb;
+    --blue_0700: #264af4;
+    --blue_0800: #0031d8;
+    --blue_0900: #0017c1;
+    --blue_1000: #00118f;
+    --blue_1100: #000071;
+    --blue_1200: #000060;
+    --light_blue_0050: #f0f9ff;
+    --light_blue_0100: #dcf0ff;
+    --light_blue_0200: #c0e4ff;
+    --light_blue_0300: #97d3ff;
+    --light_blue_0400: #57b8ff;
+    --light_blue_0500: #39abff;
+    --light_blue_0600: #008bf2;
+    --light_blue_0700: #0877d7;
+    --light_blue_0800: #0066be;
+    --light_blue_0900: #0055ad;
+    --light_blue_1000: #00428c;
+    --light_blue_1100: #00316a;
+    --light_blue_1200: #00234b;
+    --cyan_0050: #e6fcff;
+    --cyan_0100: #c8f8ff;
+    --cyan_0200: #99f2ff;
+    --cyan_0300: #79e2f2;
+    --cyan_0400: #2bc8e4;
+    --cyan_0500: #01b7d6;
+    --cyan_0600: #00a3bf;
+    --cyan_0700: #008da6;
+    --cyan_0800: #008299;
+    --cyan_0900: #006f83;
+    --cyan_1000: #006173;
+    --cyan_1100: #004c59;
+    --cyan_1200: #003741;
+    --green_0050: #e6f5ec;
+    --green_0100: #c2e5d1;
+    --green_0200: #9bd4b5;
+    --green_0300: #71c598;
+    --green_0400: #51b883;
+    --green_0500: #2cac6e;
+    --green_0600: #259d63;
+    --green_0700: #1d8b56;
+    --green_0800: #197a4b;
+    --green_0900: #115a36;
+    --green_1000: #0c472a;
+    --green_1100: #08351f;
+    --green_1200: #032213;
+    --lime_0050: #ebfad9;
+    --lime_0100: #d0f5a2;
+    --lime_0200: #c0f354;
+    --lime_0300: #ade830;
+    --lime_0400: #9ddd15;
+    --lime_0500: #8cc80c;
+    --lime_0600: #7eb40d;
+    --lime_0700: #6fa104;
+    --lime_0800: #618e00;
+    --lime_0900: #507500;
+    --lime_1000: #3e5a00;
+    --lime_1100: #2c4100;
+    --lime_1200: #1e2d00;
+    --yellow_0050: #fbf5e0;
+    --yellow_0100: #fff0b3;
+    --yellow_0200: #ffe380;
+    --yellow_0300: #ffd43d;
+    --yellow_0400: #ffc700;
+    --yellow_0500: #ebb700;
+    --yellow_0600: #d2a400;
+    --yellow_0700: #b78f00;
+    --yellow_0800: #a58000;
+    --yellow_0900: #927200;
+    --yellow_1000: #806300;
+    --yellow_1100: #6e5600;
+    --yellow_1200: #604b00;
+    --orange_0050: #ffeee2;
+    --orange_0100: #ffdfca;
+    --orange_0200: #ffc199;
+    --orange_0300: #ffa66d;
+    --orange_0400: #ff8d44;
+    --orange_0500: #ff7628;
+    --orange_0600: #fb5b01;
+    --orange_0700: #e25100;
+    --orange_0800: #c74700;
+    --orange_0900: #ac3e00;
+    --orange_1000: #8b3200;
+    --orange_1100: #6d2700;
+    --orange_1200: #541e00;
+    --red_0050: #fdeeee;
+    --red_0100: #ffdada;
+    --red_0200: #ffbbbb;
+    --red_0300: #ff9696;
+    --red_0400: #ff7171;
+    --red_0500: #ff5454;
+    --red_0600: #fe3939;
+    --red_0700: #fa0000;
+    --red_0800: #ec0000;
+    --red_0900: #ce0000;
+    --red_1000: #a90000;
+    --red_1100: #850000;
+    --red_1200: #620000;
+    --magenta_0050: #f3e5f4;
+    --magenta_0100: #ffd0ff;
+    --magenta_0200: #ffaeff;
+    --magenta_0300: #ff8eff;
+    --magenta_0400: #f661f6;
+    --magenta_0500: #f137f1;
+    --magenta_0600: #db00db;
+    --magenta_0700: #c000c0;
+    --magenta_0800: #aa00aa;
+    --magenta_0900: #8b008b;
+    --magenta_1000: #6c006c;
+    --magenta_1100: #500050;
+    --magenta_1200: #3b003b;
+    --purple_0050: #f1eafa;
+    --purple_0100: #ecddff;
+    --purple_0200: #ddc2ff;
+    --purple_0300: #cda6ff;
+    --purple_0400: #bb87ff;
+    --purple_0500: #a565f8;
+    --purple_0600: #8843e1;
+    --purple_0700: #6f23d0;
+    --purple_0800: #5c10be;
+    --purple_0900: #5109ad;
+    --purple_1000: #41048e;
+    --purple_1100: #30016c;
+    --purple_1200: #21004b;
+}
+
+@font-face {
+    font-family: 'Noto Sans JP';
+    src: url(/NotoSansJP-VariableFont_wght.ttf) format('truetype');
+}
+
+html {
+    -ms-overflow-style: none;
+}
+
+body {
+    font-family: 'Noto Sans JP';
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.overflow-auto {
+    scrollbar-width: none;
+}
+
+.nicegui-expansion .q-expansion-item__content {
+    gap: 0;
+}
