@@ -45,11 +45,10 @@ class Startup:
         self.current_page: str = ""
 
     async def startup(self) -> None:
-        ui.query(selector=".nicegui-content").classes(
-            "w-screen h-screen p-0 grid grid-cols-[350px_1fr] grid-rows-[40px_1fr] gap-0",
-        )
+        ui.query(selector=".nicegui-content").classes(add="w-screen h-screen p-0 gap-0")
+        ui.query(selector=".nicegui-expansion .q-expansion-item__content").style("gap: 0;")
 
-        with ui.row().classes("col-span-2 row-span-1 flex border-b-2"):
+        with ui.row().classes(add="border-b w-full h-[38px] p-0 gap-0"):
             # with ui.header(bordered=True).classes(add="p-0 gap-0 bg-white").classes(add="pywebview-drag-region"):
             ui.button(text="らすく", on_click=lambda: self.show_info(), icon="sym_o_pets").props(add="flat")
             ui.space()
@@ -57,58 +56,56 @@ class Startup:
             ui.button(on_click=lambda: self.toggle_fullscreen(), icon="sym_o_maximize").props(add="flat")
             ui.button(on_click=lambda: self.shutdown(), icon="sym_o_close").props(add="flat")
 
-        with ui.column().classes("h-[calc(100vh-40px)] overflow-hidden col-span-1 gap-0 border-t-2 border-r-2"):
+        with ui.row().classes(add="w-full h-[calc(100vh-38px)] p-0 gap-0 overflow-hidden"):
+            with ui.column().classes(add="border-r w-[300px] h-full p-4 gap-0"):
 
-            def link_button(text: str, icon: str, target: str) -> Expansion:
-                return (
-                    ui.expansion(
+                def link_button(text: str, icon: str, target: str) -> Expansion:
+                    return (
+                        ui.expansion(
+                            text=text,
+                            icon=icon,
+                            on_value_change=lambda: self.navigate_to(target=target),
+                        )
+                        .props("hide-expand-icon")
+                        .classes("w-full gap-0 select-none")
+                    )
+
+                def expansion(text: str, icon: str, target: str) -> Expansion:
+                    return ui.expansion(
                         text=text,
                         icon=icon,
                         on_value_change=lambda: self.navigate_to(target=target),
-                    )
-                    .props("hide-expand-icon")
-                    .classes("w-full gap-0 select-none")
-                )
+                    ).classes("w-full select-none")
 
-            def expansion(text: str, icon: str, target: str) -> Expansion:
-                return ui.expansion(
-                    text=text,
-                    icon=icon,
-                    on_value_change=lambda: self.navigate_to(target=target),
-                ).classes("w-full select-none")
+                link_button(text="ホーム", icon="sym_o_home", target="home")
+                ui.separator()
 
-            link_button(text="ホーム", icon="sym_o_home", target="home")
-            ui.separator()
+                with expansion(text="お気に入り", icon="sym_o_star", target="list-"):
+                    link_button(text="コード 01", icon="sym_o_code", target="/1")
+                    link_button(text="コード 02", icon="sym_o_code", target="/2")
 
-            with expansion(text="お気に入り", icon="sym_o_star", target="list-"):
-                link_button(text="コード 01", icon="sym_o_code", target="/1")
-                link_button(text="コード 02", icon="sym_o_code", target="/2")
+                ui.separator()
 
-            ui.separator()
+                with (
+                    ui.column()
+                    .classes("w-full flex-1 overflow-auto gap-0")
+                    .style("scrollbar-width: none; overscroll-behavior: none;")
+                ):
+                    for category01 in yaml.safe_load(Path("data/yaml/projects.yaml").read_text(encoding="utf-8")):
+                        ui.label(text=category01["text"]).classes("w-full p-4 text-sm text-gray-600 select-none")
+                        for category02 in category01["children"]:
+                            with expansion(text=category02["text"], icon="sym_o_folder", target="list-"):
+                                for item in category02["children"]:
+                                    link_button(text=item["text"], icon="sym_o_code", target=item["target"])
 
-            with (
-                ui.column()
-                .classes("w-full flex-1 overflow-auto gap-0")
-                .style("scrollbar-width: none; overscroll-behavior: none;")
-            ):
-                for category01 in yaml.safe_load(Path("data/yaml/projects.yaml").read_text(encoding="utf-8")):
-                    ui.label(text=category01["text"]).classes("w-full p-4 text-sm text-gray-600 select-none")
-                    for category02 in category01["children"]:
-                        with expansion(text=category02["text"], icon="sym_o_folder", target="list-"):
-                            for item in category02["children"]:
-                                link_button(text=item["text"], icon="sym_o_code", target=item["target"])
+                ui.separator()
+                link_button(text="開発者向け", icon="sym_o_construction", target="dev")
+                link_button(text="設定", icon="sym_o_settings", target="settings")
 
-            ui.separator()
-            link_button(text="開発者向け", icon="sym_o_construction", target="dev")
-            link_button(text="設定", icon="sym_o_settings", target="settings")
-
-        # content
-        with (
-            ui.column()
-            .classes("overflow-y-auto col-span-1 bg-white p-4 h-[calc(100vh-40px)] border-t-2 border-l-2")
-            .style(add="scrollbar-width: none; overscroll-behavior: none;") as self.content
-        ):
-            pass
+            # content
+            with ui.column() as self.content:
+                self.content.classes(add="w-[calc(100vw-300px)] h-full p-4 overflow-y-auto")
+                self.content.style(add="scrollbar-width: none; overscroll-behavior: none;")
 
         # dialog
         # info
@@ -157,7 +154,7 @@ class Startup:
                 with self.content:
                     ui.markdown(
                         content=Path("data/md/home.md").read_text(encoding="utf-8"),
-                    )
+                    ).classes("w-full")
                     for _ in range(100):
                         ui.label(text="Hello world!")
 

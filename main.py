@@ -6,7 +6,7 @@
 # nuitka-project: --output-dir="build"
 # nuitka-project: --output-filename="rusk"
 
-# nuitka-project: --mode=onefile
+# nuitka-project: --onefile
 # nuitka-project: --onefile-tempdir-spec={CACHE_DIR}\{PRODUCT}\{VERSION}
 # nuitka-project: --include-data-files=.venv\Scripts\uv.exe=uv.exe
 # nuitka-project: --include-data-files=.venv\Scripts\uvx.exe=uvx.exe
